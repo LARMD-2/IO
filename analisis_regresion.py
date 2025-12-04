@@ -65,14 +65,20 @@ df = df[(df['edad'] >= 18) & (df['edad'] <= 70)]
 # Eliminar ingresos igual a 0 o negativos
 df = df[df['ingreso_laboral_anual'] > 0]
 
-# Eliminar valores extremos (menores a 9,000 y mayores a 40,000)
+# Eliminar valores extremos (menores a 9,000 y mayores a 35,000)
 print("\nEliminando valores extremos...")
 limite_inferior = 9000
-limite_superior = 40000
+limite_superior = 35000
 df_antes = len(df)
 df = df[(df['ingreso_laboral_anual'] >= limite_inferior) & 
         (df['ingreso_laboral_anual'] <= limite_superior)]
 print(f"✓ Valores extremos eliminados: {df_antes - len(df):,} registros (rango: S/ {limite_inferior:,.0f} - S/ {limite_superior:,.0f})")
+
+# Filtrar horas trabajadas menores o iguales a 75 por semana
+print("\nFiltrando horas trabajadas por semana...")
+df_antes = len(df)
+df = df[df['horas_trabajadas_semanal'] <= 75]
+print(f"✓ Registros con horas > 75 eliminados: {df_antes - len(df):,} registros")
 
 # Eliminar filas con valores nulos en variables importantes
 df = df.dropna(subset=variables_numericas_cols)
