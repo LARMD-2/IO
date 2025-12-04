@@ -19,9 +19,9 @@ matplotlib.use('Agg')  # Modo no-interactivo, evita ventanas y errores de tkinte
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
@@ -317,13 +317,11 @@ mae_simple_train = mean_absolute_error(y_train, y_pred_simple_train)
 mse_simple_train = mean_squared_error(y_train, y_pred_simple_train)
 rmse_simple_train = np.sqrt(mse_simple_train)
 mape_simple_train = np.mean(np.abs((y_train - y_pred_simple_train) / y_train)) * 100
-r2_simple_train = r2_score(y_train, y_pred_simple_train)
 
 print(f"MAE:  S/ {mae_simple_train:,.2f}")
 print(f"MSE:  {mse_simple_train:,.2f}")
 print(f"RMSE: S/ {rmse_simple_train:,.2f}")
 print(f"MAPE: {mape_simple_train:.2f}%")
-print(f"R²:   {r2_simple_train:.4f}")
 
 # Métricas en datos de prueba
 print("\n--- Métricas en Datos de Prueba ---")
@@ -331,13 +329,11 @@ mae_simple_test = mean_absolute_error(y_test, y_pred_simple_test)
 mse_simple_test = mean_squared_error(y_test, y_pred_simple_test)
 rmse_simple_test = np.sqrt(mse_simple_test)
 mape_simple_test = np.mean(np.abs((y_test - y_pred_simple_test) / y_test)) * 100
-r2_simple_test = r2_score(y_test, y_pred_simple_test)
 
 print(f"MAE:  S/ {mae_simple_test:,.2f}")
 print(f"MSE:  {mse_simple_test:,.2f}")
 print(f"RMSE: S/ {rmse_simple_test:,.2f}")
 print(f"MAPE: {mape_simple_test:.2f}%")
-print(f"R²:   {r2_simple_test:.4f}")
 
 # Visualización regresión simple
 print("\nGenerando gráfico de regresión simple...")
@@ -349,7 +345,7 @@ axes[0].plot(X_simple_train, y_pred_simple_train, color='red', linewidth=2,
              label='Línea de regresión')
 axes[0].set_xlabel('Nivel Educativo')
 axes[0].set_ylabel('Ingreso Laboral Anual (S/)')
-axes[0].set_title(f'Regresión Lineal Simple - Entrenamiento\nR² = {r2_simple_train:.4f}')
+axes[0].set_title('Regresión Lineal Simple - Entrenamiento')
 axes[0].legend()
 axes[0].grid(True, alpha=0.3)
 
@@ -359,7 +355,7 @@ axes[1].plot(X_simple_test, y_pred_simple_test, color='red', linewidth=2,
              label='Línea de regresión')
 axes[1].set_xlabel('Nivel Educativo')
 axes[1].set_ylabel('Ingreso Laboral Anual (S/)')
-axes[1].set_title(f'Regresión Lineal Simple - Prueba\nR² = {r2_simple_test:.4f}')
+axes[1].set_title('Regresión Lineal Simple - Prueba')
 axes[1].legend()
 axes[1].grid(True, alpha=0.3)
 
@@ -400,13 +396,11 @@ mae_multiple_train = mean_absolute_error(y_train, y_pred_multiple_train)
 mse_multiple_train = mean_squared_error(y_train, y_pred_multiple_train)
 rmse_multiple_train = np.sqrt(mse_multiple_train)
 mape_multiple_train = np.mean(np.abs((y_train - y_pred_multiple_train) / y_train)) * 100
-r2_multiple_train = r2_score(y_train, y_pred_multiple_train)
 
 print(f"MAE:  S/ {mae_multiple_train:,.2f}")
 print(f"MSE:  {mse_multiple_train:,.2f}")
 print(f"RMSE: S/ {rmse_multiple_train:,.2f}")
 print(f"MAPE: {mape_multiple_train:.2f}%")
-print(f"R²:   {r2_multiple_train:.4f}")
 
 # Métricas en datos de prueba
 print("\n--- Métricas en Datos de Prueba ---")
@@ -414,13 +408,11 @@ mae_multiple_test = mean_absolute_error(y_test, y_pred_multiple_test)
 mse_multiple_test = mean_squared_error(y_test, y_pred_multiple_test)
 rmse_multiple_test = np.sqrt(mse_multiple_test)
 mape_multiple_test = np.mean(np.abs((y_test - y_pred_multiple_test) / y_test)) * 100
-r2_multiple_test = r2_score(y_test, y_pred_multiple_test)
 
 print(f"MAE:  S/ {mae_multiple_test:,.2f}")
 print(f"MSE:  {mse_multiple_test:,.2f}")
 print(f"RMSE: S/ {rmse_multiple_test:,.2f}")
 print(f"MAPE: {mape_multiple_test:.2f}%")
-print(f"R²:   {r2_multiple_test:.4f}")
 
 # Visualización regresión múltiple
 print("\nGenerando gráficos de regresión múltiple...")
@@ -433,7 +425,7 @@ axes[0].plot([y_train.min(), y_train.max()], [y_train.min(), y_train.max()],
              'r--', linewidth=2, label='Predicción perfecta')
 axes[0].set_xlabel('Ingreso Real (S/)')
 axes[0].set_ylabel('Ingreso Predicho (S/)')
-axes[0].set_title(f'Regresión Múltiple - Entrenamiento\nR² = {r2_multiple_train:.4f}')
+axes[0].set_title('Regresión Múltiple - Entrenamiento')
 axes[0].legend()
 axes[0].grid(True, alpha=0.3)
 
@@ -443,7 +435,7 @@ axes[1].plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()],
              'r--', linewidth=2, label='Predicción perfecta')
 axes[1].set_xlabel('Ingreso Real (S/)')
 axes[1].set_ylabel('Ingreso Predicho (S/)')
-axes[1].set_title(f'Regresión Múltiple - Prueba\nR² = {r2_multiple_test:.4f}')
+axes[1].set_title('Regresión Múltiple - Prueba')
 axes[1].legend()
 axes[1].grid(True, alpha=0.3)
 
@@ -481,49 +473,11 @@ print("✓ Gráfico guardado: 05_importancia_variables.png")
 plt.close()
 
 # ============================================================================
-# 6. MODELOS ADICIONALES (Ridge, Lasso, Random Forest)
+# 6. RANDOM FOREST
 # ============================================================================
 
-print("\n[6/9] Regresión Ridge...")
+print("\n[6/6] Random Forest...")
 print("="*80)
-
-# Entrenar Ridge con log
-modelo_ridge = Ridge(alpha=1.0, random_state=42)
-modelo_ridge.fit(X_multiple_train, y_log_train)
-
-# Predicciones
-y_log_pred_ridge_test = modelo_ridge.predict(X_multiple_test)
-y_pred_ridge_test = np.exp(y_log_pred_ridge_test)
-
-# Métricas Ridge - Test
-mae_ridge = mean_absolute_error(y_test, y_pred_ridge_test)
-mse_ridge = mean_squared_error(y_test, y_pred_ridge_test)
-rmse_ridge = np.sqrt(mse_ridge)
-mape_ridge = np.mean(np.abs((y_test - y_pred_ridge_test) / y_test)) * 100
-r2_ridge = r2_score(y_test, y_pred_ridge_test)
-
-print(f"MAE:  S/ {mae_ridge:,.2f}")
-print(f"RMSE: S/ {rmse_ridge:,.2f}")
-print(f"MAPE: {mape_ridge:.2f}%")
-print(f"R²:   {r2_ridge:.4f}")
-
-# Visualización Ridge
-print("\nGenerando gráfico de Ridge...")
-plt.figure(figsize=(8, 6))
-plt.scatter(y_test, y_pred_ridge_test, alpha=0.4, color='purple')
-plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 
-         'r--', linewidth=2, label='Predicción perfecta')
-plt.xlabel('Ingreso Real (S/)')
-plt.ylabel('Ingreso Predicho (S/)')
-plt.title(f'Regresión Ridge - Prueba\nR² = {r2_ridge:.4f}, MAPE = {mape_ridge:.2f}%', fontweight='bold')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.savefig('09_ridge_predicciones.png', dpi=300, bbox_inches='tight')
-print("✓ Gráfico guardado: 09_ridge_predicciones.png")
-plt.close()
-
-print("\n[7/7] Random Forest...")
 print("="*80)
 
 # Entrenar Random Forest con hiperparámetros optimizados
@@ -545,12 +499,10 @@ mae_rf = mean_absolute_error(y_test, y_pred_rf_test)
 mse_rf = mean_squared_error(y_test, y_pred_rf_test)
 rmse_rf = np.sqrt(mse_rf)
 mape_rf = np.mean(np.abs((y_test - y_pred_rf_test) / y_test)) * 100
-r2_rf = r2_score(y_test, y_pred_rf_test)
 
 print(f"MAE:  S/ {mae_rf:,.2f}")
 print(f"RMSE: S/ {rmse_rf:,.2f}")
 print(f"MAPE: {mape_rf:.2f}%")
-print(f"R²:   {r2_rf:.4f}")
 
 # Visualización Random Forest
 print("\nGenerando gráfico de Random Forest...")
@@ -560,7 +512,7 @@ plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()],
          'r--', linewidth=2, label='Predicción perfecta')
 plt.xlabel('Ingreso Real (S/)')
 plt.ylabel('Ingreso Predicho (S/)')
-plt.title(f'Random Forest - Prueba\nR² = {r2_rf:.4f}, MAPE = {mape_rf:.2f}%', fontweight='bold')
+plt.title(f'Random Forest - Prueba\nMAPE = {mape_rf:.2f}%', fontweight='bold')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -594,34 +546,24 @@ print("="*80)
 # Tabla comparativa
 # Tabla comparativa de todos los modelos
 comparacion = pd.DataFrame({
-    'Métrica': ['MAE (S/)', 'MSE', 'RMSE (S/)', 'MAPE (%)', 'R²'],
+    'Métrica': ['MAE (S/)', 'MSE', 'RMSE (S/)', 'MAPE (%)'],
     'Regresión Simple': [
         f'{mae_simple_test:,.2f}',
         f'{mse_simple_test:,.2f}',
         f'{rmse_simple_test:,.2f}',
-        f'{mape_simple_test:.2f}',
-        f'{r2_simple_test:.4f}'
+        f'{mape_simple_test:.2f}'
     ],
     'Regresión Múltiple': [
         f'{mae_multiple_test:,.2f}',
         f'{mse_multiple_test:,.2f}',
         f'{rmse_multiple_test:,.2f}',
-        f'{mape_multiple_test:.2f}',
-        f'{r2_multiple_test:.4f}'
-    ],
-    'Ridge': [
-        f'{mae_ridge:,.2f}',
-        f'{mse_ridge:,.2f}',
-        f'{rmse_ridge:,.2f}',
-        f'{mape_ridge:.2f}',
-        f'{r2_ridge:.4f}'
+        f'{mape_multiple_test:.2f}'
     ],
     'Random Forest': [
         f'{mae_rf:,.2f}',
         f'{mse_rf:,.2f}',
         f'{rmse_rf:,.2f}',
-        f'{mape_rf:,.2f}',
-        f'{r2_rf:.4f}'
+        f'{mape_rf:.2f}'
     ]
 })
 
@@ -630,15 +572,15 @@ print(comparacion.to_string(index=False))
 
 # Visualización comparativa - Métricas de error
 print("\nGenerando gráfico comparativo de métricas...")
-modelos = ['Simple', 'Múltiple', 'Ridge', 'Random\nForest']
-mae_vals = [mae_simple_test, mae_multiple_test, mae_ridge, mae_rf]
-rmse_vals = [rmse_simple_test, rmse_multiple_test, rmse_ridge, rmse_rf]
-mape_vals = [mape_simple_test, mape_multiple_test, mape_ridge, mape_rf]
+modelos = ['Simple', 'Múltiple', 'Random\nForest']
+mae_vals = [mae_simple_test, mae_multiple_test, mae_rf]
+rmse_vals = [rmse_simple_test, rmse_multiple_test, rmse_rf]
+mape_vals = [mape_simple_test, mape_multiple_test, mape_rf]
 
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
 # MAE
-axes[0].bar(modelos, mae_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
+axes[0].bar(modelos, mae_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#d62728'])
 axes[0].set_ylabel('MAE (S/)')
 axes[0].set_title('Error Absoluto Medio (MAE)', fontweight='bold')
 axes[0].grid(axis='y', alpha=0.3)
@@ -646,7 +588,7 @@ for i, v in enumerate(mae_vals):
     axes[0].text(i, v + 100, f'{v:,.0f}', ha='center', va='bottom', fontsize=9)
 
 # RMSE
-axes[1].bar(modelos, rmse_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
+axes[1].bar(modelos, rmse_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#d62728'])
 axes[1].set_ylabel('RMSE (S/)')
 axes[1].set_title('Raíz del Error Cuadrático Medio (RMSE)', fontweight='bold')
 axes[1].grid(axis='y', alpha=0.3)
@@ -654,7 +596,7 @@ for i, v in enumerate(rmse_vals):
     axes[1].text(i, v + 100, f'{v:,.0f}', ha='center', va='bottom', fontsize=9)
 
 # MAPE
-axes[2].bar(modelos, mape_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
+axes[2].bar(modelos, mape_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#d62728'])
 axes[2].set_ylabel('MAPE (%)')
 axes[2].set_title('Error Porcentual Absoluto Medio (MAPE)', fontweight='bold')
 axes[2].grid(axis='y', alpha=0.3)
@@ -666,54 +608,33 @@ plt.savefig('06_comparacion_modelos.png', dpi=300, bbox_inches='tight')
 print("✓ Gráfico guardado: 06_comparacion_modelos.png")
 plt.close()
 
-# Visualización R²
-print("\nGenerando gráfico comparativo de R²...")
-r2_vals = [r2_simple_test, r2_multiple_test, r2_ridge, r2_rf]
-
-plt.figure(figsize=(10, 6))
-bars = plt.bar(modelos, r2_vals, alpha=0.7, color=['#1f77b4', '#ff7f0e', '#2ca02c', '#9467bd'])
-plt.ylabel('R² (Coeficiente de Determinación)')
-plt.title('Comparación de R² entre Modelos', fontweight='bold', fontsize=14)
-plt.ylim(0, max(r2_vals) * 1.2)
-plt.grid(axis='y', alpha=0.3)
-
-for i, v in enumerate(r2_vals):
-    plt.text(i, v + 0.01, f'{v:.4f}', ha='center', va='bottom', fontsize=10, fontweight='bold')
-
-plt.tight_layout()
-plt.savefig('08_comparacion_r2.png', dpi=300, bbox_inches='tight')
-print("✓ Gráfico guardado: 08_comparacion_r2.png")
-plt.close()
-
 # Conclusiones
 print("\n" + "="*80)
 print("CONCLUSIONES")
 print("="*80)
 
-# Encontrar mejor modelo por R²
-modelos_dict = {
-    'Regresión Simple': r2_simple_test,
-    'Regresión Múltiple': r2_multiple_test,
-    'Ridge': r2_ridge,
-    'Random Forest': r2_rf
-}
-mejor_modelo = max(modelos_dict, key=modelos_dict.get)
-print(f"\n✓ Mejor modelo según R²: {mejor_modelo} (R² = {modelos_dict[mejor_modelo]:.4f})")
-
-# Ranking de modelos
-print("\n✓ Ranking de modelos por R²:")
-for i, (modelo, r2) in enumerate(sorted(modelos_dict.items(), key=lambda x: x[1], reverse=True), 1):
-    print(f"  {i}. {modelo}: {r2:.4f}")
-
 # Mejor modelo por MAE
 mae_dict = {
     'Regresión Simple': mae_simple_test,
     'Regresión Múltiple': mae_multiple_test,
-    'Ridge': mae_ridge,
     'Random Forest': mae_rf
 }
 mejor_mae = min(mae_dict, key=mae_dict.get)
 print(f"\n✓ Mejor modelo según MAE: {mejor_mae} (MAE = S/ {mae_dict[mejor_mae]:,.2f})")
+
+# Mejor modelo por MAPE
+mape_dict = {
+    'Regresión Simple': mape_simple_test,
+    'Regresión Múltiple': mape_multiple_test,
+    'Random Forest': mape_rf
+}
+mejor_mape = min(mape_dict, key=mape_dict.get)
+print(f"\n✓ Mejor modelo según MAPE: {mejor_mape} (MAPE = {mape_dict[mejor_mape]:.2f}%)")
+
+# Ranking de modelos por MAE
+print("\n✓ Ranking de modelos por MAE:")
+for i, (modelo, mae) in enumerate(sorted(mae_dict.items(), key=lambda x: x[1]), 1):
+    print(f"  {i}. {modelo}: S/ {mae:,.2f}")
 
 mejoria_mae = ((mae_simple_test - mae_multiple_test) / mae_simple_test) * 100
 mejoria_rmse = ((rmse_simple_test - rmse_multiple_test) / rmse_simple_test) * 100
